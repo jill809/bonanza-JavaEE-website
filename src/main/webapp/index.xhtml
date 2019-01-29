@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>落地页</title>
+        <h:outputStylesheet name="css/index.css"/>
+    </h:head>
+    <h:body>
+        <div id="bg-layer">
+            <div id="footer">
+                <a href="#">联络我们</a>
+                <div class="space"/>
+                <a href="#">版权声明</a>
+                <div class="space"/>
+                <a href="#">举报</a>
+            </div>
+        </div>
+        <div class="content">
+            <div id="header" class="clearfix">
+                <div class="float-left">
+                    <img alt="" src="resources/logo.png"/>
+                </div>
+                <div class="float-right" id="right-up-buttons">
+                    <a class="btn">教程</a>
+                    <div class="space"/>
+                    <h:commandButton class="btn show-login" value="登录">
+                        <f:setPropertyActionListener value="#{true}" target="#{userController.showLogin}"/>
+                        <p:ajax update="login-form-container register-form-container"/>
+                    </h:commandButton>
+                    <div class="space"/>
+                    <h:commandButton class="btn show-register" id="register" value="注册">
+                        <f:setPropertyActionListener value="#{true}" target="#{userController.showRegister}"/>
+                        <p:ajax update="login-form-container register-form-container"/>
+                    </h:commandButton>
+                </div>
+            </div>
+            <div id="slogen" class="anime-while-logreg">
+                <h:messages showSummary="true"
+                            errorStyle="color: #d20005"
+                            infoStyle="display: none"
+                            warnStyle="display: none"/>
+                <p>极简、易用的项目管理平台，</p>
+                <p>为创意者设计。</p>
+            </div>
+            <div id="sketch">
+                <h:graphicImage class="sidebar" value="/resources/index-res/sidebar-sketch.png"/>
+                <div class="box left-box-1 top-box-1"/>
+                <div class="box left-box-2 top-box-1"/>
+                <div class="box left-box-3 top-box-1 anime-while-logreg"/>
+                <div class="box left-box-1 top-box-2"/>
+                <div class="box left-box-2 top-box-2"/>
+                <div class="box left-box-3 top-box-2 anime-while-logreg"/>
+                <div id="log-form" class="logreg-form anime-while-logreg">
+                    <p:outputPanel id="login-form-container">
+                        <h:form id="h-log-form" rendered="#{userController.showLogin}">
+                            <p><h:inputText value="#{userController.selected.userPhoneNum}"
+                                            required="true" styleClass="logreg-text"
+                                            a:placeholder="手机号码" id="log-phonenum"/></p>
+                            <p><h:inputSecret value="#{userController.selected.userPassword}"
+                                              required="true" styleClass="logreg-text"
+                                              a:placeholder="密码" id="log-pass"/></p>
+                            <p class="text-right">
+                                <h:commandButton style="margin-left:50px;"
+                                                 action="#{userController.login}" value="登录"
+                                                 styleClass="logreg-button"/>
+                            </p>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+                <div id="reg-form" class="logreg-form anime-while-logreg">
+                    <p:outputPanel id="register-form-container">
+                        <h:form id="h-reg-form" rendered="#{userController.showRegister}">
+                            <p>
+                                <h:inputText value="#{userController.selected.userPhoneNum}"
+                                             required="true" styleClass="logreg-text"
+                                             a:placeholder="手机号码" id="reg-phone">
+                                    <f:validator validatorId="jill.phoneValidater"/>
+                                </h:inputText>
+                            </p>
+                            <p><h:inputSecret value="#{userController.selected.userPassword}"
+                                              required="true" styleClass="logreg-text"
+                                              a:placeholder="密码" id="reg-pass"/></p>
+                            <p><h:inputText value="#{userController.selected.userName}"
+                                            required="true" styleClass="logreg-text"
+                                            a:placeholder="昵称" id="reg-name"/></p>
+                            <p class="text-right">
+                                <h:commandButton style="margin-left:50px;"
+                                                 action="#{userController.create}" value="注册"
+                                                 styleClass="logreg-button"/>
+                            </p>
+                        </h:form>
+                    </p:outputPanel>
+                </div>
+            </div>
+        </div>
+        <h:outputScript name="index-res/index.js"/>
+    </h:body>
+</html>

@@ -1,0 +1,63 @@
+.teamName{
+    position: relative;
+    float:left;
+    font-weight:200;
+    margin:0px 0px 40px 80px;
+}
+
+.newTeam{
+    position: relative;
+    float:right;
+    margin:0px 0px 40px 40px;
+}
+
+.out {
+    position: relative;
+    margin:50px 40px 0px 30px;
+    padding:10px 0px 0px 0px;
+}
+
+.showTeam {
+    border-radius: 10px;
+    display:inline-block;
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+    background-color: #e8f8fa;
+    height: 200px;
+    width:200px;
+    justify-content: center;  /*水平居中*/
+    align-items: center;      /*垂直居中*/
+    margin:0px 30px 40px 30px;
+    padding:0px;
+    transition: all 0.8s;
+}
+
+.showTeam:hover{
+    transform: scale(1.1);/*鼠标经过图片放大的倍数*/
+    background-color:#cdf7fc;
+}
+.delete{
+    float:right;
+    margin:6px 6px 6px 6px;
+}
+
+.image{
+    display:block;
+    position: relative;
+    text-align: center;
+    height: 80px;
+    line-height: 100px;
+    margin:50px 20px 0px 20px;
+}
+
+.team{
+    display:block;
+    position: relative;
+    text-align: center;
+    background-color: #cdf7fc;
+    margin:20px 0px 20px 0px;
+    height: 25px;
+    line-height: 30px;
+    font-size: 20px;
+}

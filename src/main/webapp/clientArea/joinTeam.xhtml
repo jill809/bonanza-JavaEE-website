@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8"/>
+        <title>Facelets Template Example</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="cssTeam.css"/>
+                <div style="position:absolute;top:180px;left:280px;border: 5px solid darkgray;width: 60%;height: 35%;background-color: white;">
+                    <table  width="20%"  style="float:left; ">
+                        <h:graphicImage value="./../resources/showTeam1.png" rendered="#{userController.user.userId%7 eq 0}" style="margin: 30px; height:80px;"></h:graphicImage>
+                        <h:graphicImage value="./../resources/showTeam2.png" rendered="#{userController.user.userId%7 eq 1}" style="margin: 30px;height: 80px"></h:graphicImage>
+                        <h:graphicImage value="./../resources/showTeam3.png" rendered="#{userController.user.userId%7 eq 2}" style="margin: 30px;height: 80px"></h:graphicImage>
+                        <h:graphicImage value="./../resources/showTeam4.png" rendered="#{userController.user.userId%7 eq 3}" style="margin: 30px; height: 80px"></h:graphicImage>
+                        <h:graphicImage value="./../resources/showTeam5.png" rendered="#{userController.user.userId%7 eq 4}" style="margin: 30px;height: 80px"></h:graphicImage>
+                        <h:graphicImage value="./../resources/showTeam6.png" rendered="#{userController.user.userId%7 eq 5}" style="margin: 30px; height: 80px"></h:graphicImage>
+                    </table>
+                    <table width="80%" align="left" style="float:right">
+
+                        <tr>
+                            <td ><font color="blue" size="7">加入团队</font></td>
+                        </tr>
+                        <h:form>
+                            <tr>
+                                <td>团队名</td>
+                                <td><h:inputText value="#{teamController.teamNameToFind}"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:commandButton action="#{teamController.findTeam()}" value="查找并加入"></h:commandButton>
+                                    <h:commandButton action="team" value="返回"></h:commandButton>
+                                </td>
+
+                            </tr>
+                        </h:form>
+                    </table>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

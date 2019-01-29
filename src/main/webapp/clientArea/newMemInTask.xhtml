@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:em = "http://xmlns.jcp.org/jsf/composite/emcomp">
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8"/>
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>删除成员</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="cssTeam.css"/>
+                <h:outputStylesheet library="css" name="teamDetail.css"/>
+                <h3 style="margin:50px 20px 0px 100px; font-size: 25px">团队中的其他成员</h3>
+                <div class="memberout">
+                    <h:form>
+                        <div class="memberheader">
+                            <div style="display: inline">
+                                <h2>团队成员</h2>
+                            </div>
+                            <div class="addButton">
+                                <h:commandButton image="../resources/memberIcon/add1.svg" action="findUser" style="height:40px"
+                                                 rendered="#{teamController.userRole eq 'Creator'||teamController.userRole eq 'Admin'}"></h:commandButton>
+                            </div>
+                            <!--添加成员-->
+                        </div>
+                        <div class="creator" title="创建者">
+                            <div class="creatoricon">
+                                <h:graphicImage value="./../resources/memberIcon/creator.svg" height="40px"></h:graphicImage>
+                            </div>
+                            <div class="creatorname">
+                                <h:outputText value="#{teamDetailController.creator.userName}"></h:outputText>
+                            </div>
+                        </div>
+
+                        <ui:repeat value="#{teamDetailController.adminList}" var="admin"
+                                   rendered="#{teamDetailController.adminList ne null}">
+                            <div class="admin">
+                                <div title="管理员">
+                                    <div class="creatoricon">
+                                        <h:graphicImage value="./../resources/memberIcon/admin.svg" height="40px"></h:graphicImage>
+                                    </div>
+                                    <div class="creatorname">
+                                        <h:outputText value="#{admin.userName}"></h:outputText>
+                                    </div>
+                                </div>
+                                <div class="setadmin" title="撤销管理员">
+                                    <h:commandButton image="./../resources/memberIcon/unsetAdmin.svg"
+                                                     style="height:25px"
+                                                     rendered="#{teamController.userRole eq 'Creator'}"
+                                                     actionListener="#{teamDetailController.unSetAdmin(admin)}"></h:commandButton>
+                                </div>
+                                <div class="del" title="移除成员">
+                                    <h:commandButton image="../resources/memberIcon/delete.png"
+                                                     style="height:25px"
+                                                     rendered="#{teamController.userRole eq 'Creator' }"
+                                                     actionListener="#{teamDetailController.removeUserFromTeam(admin)}"></h:commandButton>
+                                </div>
+                            </div>
+                        </ui:repeat>
+
+                        <ui:repeat value="#{teamDetailController.memberList}" var="member"
+                                   rendered="#{teamDetailController.memberList ne null}">
+                            <div class="member">
+                                <div title="普通成员">
+                                    <div class="creatoricon">
+                                        <h:graphicImage value="./../resources/memberIcon/member.png" height="40px"></h:graphicImage>
+                                    </div>
+                                    <div class="creatorname">
+                                        <h:outputText value="#{member.userName}"></h:outputText>
+                                    </div>
+                                </div>
+                                <div class="setadmin" title="设为管理员">
+                                    <h:commandButton image="./../resources/memberIcon/setAdmin.svg"
+                                                     style="height:25px"
+                                                     rendered="#{teamController.userRole eq 'Creator'}"
+                                                     actionListener="#{teamDetailController.setAdmin(member)}"></h:commandButton>
+                                </div>
+                                <div class="del" title="移除成员">
+                                    <h:commandButton image="./../resources/memberIcon/delete.png"
+                                                     style="height:25px"
+                                                     rendered="#{teamController.userRole eq 'Creator'||teamController.userRole eq 'Admin'}"
+                                                     actionListener="#{teamDetailController.removeUserFromTeam(member)}"></h:commandButton>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </h:form>
+                </div>
+                <div id="projectOfTeam" class="project-div">
+                    <div>
+                        <div class="out">
+                            <ui:repeat value="#{taskController.userNotIn}" var="taskmembers"
+                                       rendered="#{taskController.userNotIn ne null}">
+                                <div class="showTeam">
+                                    <div class="image">
+                                        <div class="image">
+                                            <h:form>
+                                                <h:commandLink title="添加成员" action="#{taskController.updateMemTask()}"  actionListener="#{taskController.setTmpUser(taskmembers)}">
+                                                    <h:graphicImage  value="./../resources/showTeam1.png" rendered="#{taskmembers.userId%7 eq 0}" style=" height: 80px "></h:graphicImage>
+                                                    <h:graphicImage  value="./../resources/showTeam2.png" rendered="#{taskmembers.userId%7 eq 1}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage  value="./../resources/showTeam3.png" rendered="#{taskmembers.userId%7 eq 2}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam4.png" rendered="#{taskmembers.userId%7 eq 3}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage  value="./../resources/showTeam5.png" rendered="#{taskmembers.userId%7 eq 4}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage  value="./../resources/showTeam6.png" rendered="#{taskmembers.userId%7 eq 5}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam7.png" rendered="#{taskmembers.userId%7 eq 6}" style=" height: 80px"></h:graphicImage>
+                                                </h:commandLink>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                    <div class="team">
+                                        <h:form>
+                                            <h:outputText  value="#{taskmembers.userName}"></h:outputText>
+                                            <br/>
+                                            <h:commandLink  action="#{taskController.updateMemTask()}"  actionListener="#{taskController.setTmpUser(taskmembers)}" value="确认添加" style="font-size:15px;height:30px"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

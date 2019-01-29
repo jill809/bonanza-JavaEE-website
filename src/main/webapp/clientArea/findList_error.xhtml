@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>查询用户</title>
+    </h:head>
+    <h:body>
+        <div>
+            <div style="float:left">
+                <img src="../resources/logo.png"/>
+            </div>
+            <div style="clear: both;"/>
+        </div>
+
+        <div style="background: url(../resources/regist_bg.jpg);width: 1800px; height: 900px;">
+            <div style="position:relative;border: 3px solid darkgray;border-radius: 50px;width: 500px;height: 300px;top: 200px;background-color: white;text-align: center;margin:0px auto;" align="center">
+
+                <h:form style="top: 200px;margin: 0px auto;">
+                    <div style="margin-top: 30px;">
+                        <h:commandButton image="../resources/memberIcon/cross3.svg" action="teamDetail" style="position: absolute;right: 20px;top: 15px;" />
+                        <font color="red" size="6" >查询结果</font>
+                        <h4>输入手机号无效</h4>
+
+                        <h:outputText id="notFoundPNB" style="font-size: 20px;" value="该手机号不存在，请检查" rendered="#{teamDetailController.notFoundPNB}">
+                            <font color="red" size="6" >获取失败</font>
+                        </h:outputText>
+
+                        <br/>
+                        <h:outputText id="existUserInTeam" style="font-size: 20px;" value="用户已加入该团队"
+                                      rendered="#{teamDetailController.existUserInTeam}"/><br/><br/><br/>
+                        <h:commandButton id="resetButton" action="findUser" value="重新输入" style="width:80px;height: 40px;maigin-top:50px;"/>
+                        <!--<h:commandButton id="cancelButton" action="teamDetail" value="退出查询" style="width:80px;height: 40px;maigin-top:50px;"/>-->
+                    </div>
+                </h:form>
+
+            </div>
+        </div>
+    </h:body>
+</html>
+

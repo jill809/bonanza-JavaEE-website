@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8"/>
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Facelets Template Example</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="CssProjectDetail.css"/>
+                <div>
+                    <div style="display: inline">
+                        <h2 style="margin:50px 20px 20px 100px; font-size: 25px">#{projectController.project.projectName}的计划</h2>
+
+
+                    </div>
+                </div>
+                <h:form>
+                    <h:commandLink style="margin:50px 40px 20px 100px; font-size: 15px" id="plan-link-id" action="projectDetail" styleClass="item_left" value="计划"/>
+                    <h:commandLink  style="margin:50px 20px 20px 100px; font-size: 15px" id="memo-link-id" action="comment" styleClass="item_left" value="留言"/>
+                </h:form>
+                <br/>
+                <br/>
+
+                <p:commandButton style="margin:10px 0px 10px 60px ;" value=" + Add新计划" styleClass="right" type="button" onclick="PF('planDlg').show()"/>
+                <!--新建计划-->
+                <p:dialog header="新建计划" widgetVar="planDlg" showEffect="fade" hideEffect="fade">
+                    <h:form id="newPlanForm">
+                        <p:outputLabel value="计划名称：" />
+                        <h:inputText id="planN" value="#{projectDetailController.selected.planName}" required="true"/>
+                        <br/>
+                        <p:outputLabel value="计划介绍：" />
+                        <h:inputTextarea id="pass" value="#{projectDetailController.selected.planIntro}"/>
+                        <br/>
+                        <p:outputLabel value="计划开始日期：" />
+                        <p:calendar id="startTime" value="#{projectDetailController.selected.planStartTime}" showOn="button" required="true"/>
+                        <br/>
+                        <p:outputLabel value="计划结束日期：" />
+                        <p:calendar id="endTime" value="#{projectDetailController.selected.planFinishTime}" showOn="button" required="true"/>
+                        <br/>
+                        <br/>
+                        <h:commandButton value="确认" action="#{projectDetailController.createPlan()}" styleClass="center_display"/>
+                        <h:commandButton value="放弃" type="reset" styleClass="center_display"/>
+                    </h:form>
+                </p:dialog>
+                <div class="planListInnerBox">
+                    <ui:repeat value="#{projectDetailController.getPlanList()}" var="plan"
+                               rendered="#{projectDetailController.getPlanList() ne null}">
+                        <div class="planItem">
+                            <div class="planHeader">
+                                <div class="planName">
+                                    <h:outputText  value="#{plan.planName}">
+                                    </h:outputText>
+                                </div>
+                                <div class="delPlan">
+                                    <h:form>
+                                        <h:commandButton style="height:15px;"   action="#{projectDetailController.delPlan(plan)}" image="./../resources/delTeam.png"/>
+                                        <h:commandButton  style="height:25px;"
+                                                          actionListener="#{projectDetailController.findSelectedPlan(plan)}" action ="editPlan.xhtml"  image="./../resources/edit.png"/>
+                                    </h:form>
+                                </div>
+                                <div class="plantime">
+                                    <h:outputText value="计划开始时间">
+                                    </h:outputText>
+                                    <h:outputText value="#{plan.planStartTime}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    </h:outputText>
+                                </div>
+                                <div class="plantime">
+                                    <h:outputText value="预计完成时间">
+                                    </h:outputText>
+                                    <h:outputText value="#{plan.planFinishTime}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    </h:outputText>
+                                </div>
+                                <div class="planInfo">
+                                    <h:outputText value="计划描述:">
+                                    </h:outputText>
+                                    <h:outputText value="#{plan.planIntro}">
+                                    </h:outputText>
+                                </div>
+                            </div>
+
+                            <div>
+                                <br/>
+                                <br/>
+                                <div class="planName">
+                                    <h:outputText style="float:left;margin-left:25px;font-size:20px" value="任务："/></div>
+                                <br/>
+                                <div class="addtask">
+                                    <h:form><h:commandButton title="新建任务" style="float:left;margin-left:25px" class="addtask"  image="./../resources/addtask.png" action="newTask.xhtml"
+                                                             actionListener="#{projectDetailController.findSelectedPlan(plan)}"/></h:form>
+                                </div>
+                                <ui:repeat value="#{plan.taskCollection}" var="task"
+                                           rendered="#{plan.taskCollection ne null}">
+                                    <div class="taskItem">
+                                        <div class="deltask">
+                                            <h:form>
+                                                <h:commandButton title="删除"  style="height:15px;"   action="#{taskController.deleteTask()}"
+                                                                 actionListener="#{taskController.findSelectedTask(task)}" image="./../resources/delTeam.png"/>
+                                            </h:form>
+                                        </div>
+                                        <div class="set">
+                                            <h:form>
+                                                <h:commandButton style="height:25px;"   action="#{taskController.ChangeToUnfinish(task)}" rendered="#{task.taskState eq 'Finish'}"
+                                                                 image="./../resources/yi.png"/>
+                                            </h:form>
+                                            <h:form>
+                                                <h:commandButton style="height:25px;"   action="#{taskController.ChangeToFinish(task)}" rendered="#{task.taskState eq 'Unfinish'}"
+                                                                 image="./../resources/wei.png"/>
+                                            </h:form>
+                                        </div>
+                                        <div class="taskName">
+                                            <h:outputText value="#{task.taskName}" rendered="#{task.taskState eq 'Finish'}">
+                                            </h:outputText>
+                                        </div>
+                                        <div class="untaskName">
+                                            <h:outputText value="#{task.taskName}" rendered="#{task.taskState eq 'Unfinish'}">
+                                            </h:outputText>
+                                        </div>
+
+                                        <h:form>
+
+                                            <h:commandButton title="编辑任务" style="height:25px; float:left;margin-top: 20px;"
+                                                             actionListener="#{taskController.findSelectedTask(task)}"
+                                                             action ="editTask.xhtml"  image="./../resources/edit.png"/>
+                                            <!--删除任务的图标显示-->
+                                        </h:form>
+                                        <br/>
+                                        <div class="taskInfo">
+                                            <h:outputText value="#{task.taskIntro}">
+                                            </h:outputText>
+                                        </div>
+                                        <div class="executor">
+                                            <div class="executorTitle">
+                                                <div style="display:inline-block;margin-bottom: 5px" >
+                                                    <h:outputText value="执行人"/>
+                                                </div>
+                                                <div style="display:inline;float:right;margin-top:5px">
+
+
+                                                </div>
+                                                <div style="display:inline;float:right;margin-top:5px;">
+                                                    <h:form><h:commandButton title="添加成员"       rendered="#{teamController.userRole eq 'Creator'||teamController.userRole eq 'Admin'}" image="../resources/memberIcon/add1.svg" action="newMemInTask.xhtml"
+                                                                             style="height:25px"  actionListener="#{taskController.findSelectedTask(task)}"/>
+                                                        <h:commandButton title="删除成员"      rendered="#{teamController.userRole eq 'Creator'||teamController.userRole eq 'Admin'}" style="height:20px; margin-right: 15px" action="selectUser.xhtml"
+                                                                         actionListener="#{taskController.findSelectedTask(task)}" image="./../resources/delTeam.png"/></h:form>
+                                                </div>
+
+
+                                            </div >
+                                            <div class="executorOut">
+                                                <ui:repeat value="#{task.userCollection}" var="taskmembers"
+                                                           rendered="#{task.userCollection ne null}">
+                                                    <div>
+                                                        <h:form>
+                                                            <div class="executorItem">
+                                                                <div  class="creatoricon">
+                                                                    <h:graphicImage  value="./../resources/showTeam1.png" rendered="#{taskmembers.userId%7 eq 0}" style=" height: 25px "></h:graphicImage>
+                                                                    <h:graphicImage  value="./../resources/showTeam2.png" rendered="#{taskmembers.userId%7 eq 1}" style=" height: 25px"></h:graphicImage>
+                                                                    <h:graphicImage  value="./../resources/showTeam3.png" rendered="#{taskmembers.userId%7 eq 2}" style=" height: 25px"></h:graphicImage>
+                                                                    <h:graphicImage value="./../resources/showTeam4.png" rendered="#{taskmembers.userId%7 eq 3}" style=" height: 25px"></h:graphicImage>
+                                                                    <h:graphicImage  value="./../resources/showTeam5.png" rendered="#{taskmembers.userId%7 eq 4}" style=" height: 25px"></h:graphicImage>
+                                                                    <h:graphicImage  value="./../resources/showTeam6.png" rendered="#{taskmembers.userId%7 eq 5}" style=" height: 25px"></h:graphicImage>
+                                                                    <h:graphicImage value="./../resources/showTeam7.png" rendered="#{taskmembers.userId%7 eq 6}" style=" height: 25px"></h:graphicImage>
+                                                                </div>
+                                                                <h:outputText  value="#{taskmembers.userName}"></h:outputText>
+
+                                                            </div>
+                                                        </h:form>
+
+                                                    </div>
+                                                </ui:repeat>
+                                            </div>
+                                        </div>
+
+                                        <div class="time">
+                                            <h:outputText value="#{task.taskDate}">
+                                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                            </h:outputText>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,6 @@
+.macaron-spacing {
+    /* 和 macaron-recover-spacing 一起使用 */
+    line-height: 140px;
+    letter-spacing: 40px;
+}
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8"/>
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>项目评论</title>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="cssComment.css"/>
+                <div style="display: inline">
+                    <h2 style="margin:50px 20px 20px 100px; font-size: 25px">#{projectController.project.projectName}的留言</h2>
+                </div>
+                <br/><br/>
+
+                <h:form>
+                    <h:commandLink style="margin:50px 40px 20px 100px; font-size: 15px" id="plan-link-id" action="projectDetail" styleClass="item_left" value="计划"/>
+                    <h:commandLink  style="margin:50px 20px 20px 100px; font-size: 15px" id="memo-link-id" action="comment" styleClass="item_left" value="留言"/>
+                </h:form>
+                <div class="out">
+                    <ui:repeat value="#{projectController.project.commentCollection}" var="comment">
+                        <div class="show">
+                            <div class="memotext">
+                                <h:outputText value="#{comment.commentText}"/>
+                                <div class="userImage">
+                                    <h:graphicImage value="./../resources/showTeam1.png" rendered="#{comment.useruserId.userId%7 eq 0}" style=" height: 40px"></h:graphicImage>
+                                    <h:graphicImage value="./../resources/showTeam2.png" rendered="#{comment.useruserId.userId%7 eq 1}" style=" height: 40px"></h:graphicImage>
+                                    <h:graphicImage value="./../resources/showTeam3.png" rendered="#{comment.useruserId.userId%7 eq 2}" style=" height: 40px"></h:graphicImage>
+                                    <h:graphicImage value="./../resources/showTeam4.png" rendered="#{comment.useruserId.userId%7 eq 3}" style=" height: 40px"></h:graphicImage>
+                                    <h:graphicImage value="./../resources/showTeam5.png" rendered="#{comment.useruserId.userId%7 eq 4}" style=" height: 40px"></h:graphicImage>
+                                    <h:graphicImage value="./../resources/showTeam6.png" rendered="#{comment.useruserId.userId%7 eq 5}" style=" height: 40px"></h:graphicImage>
+                                    <h:graphicImage value="./../resources/showTeam7.png" rendered="#{comment.useruserId.userId%7 eq 6}" style=" height: 40px"></h:graphicImage>
+                                </div>
+                                <div class="userName">
+                                    <h:outputText value="#{comment.useruserId.userName}"/>
+                                </div>
+                                <div class="time">
+                                    <h:outputText value="#{comment.commentDate}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    </h:outputText>
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+                <h:form>
+                    <p:growl id="createComment" showDetail="true" sticky="true"/>
+                    <p:panel header="新建一条评论">
+                        <h:form>
+                            <span>内容：</span>
+                            <p:inputTextarea id="commentTextArea" value="#{commentControler.currentText}"
+                                             autoResize="true"/>
+                            <p:commandButton action="#{commentControler.create}" id="submitButton" value="确认"/>
+                        </h:form>
+                    </p:panel>
+                    <br/><br/>
+                    <br/><br/>
+                    <!--<p:commandButton id="createTeam" value="新建一个团队" icon="newbutton" action="none" />-->
+                    <!--新建团队弹出框-->
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

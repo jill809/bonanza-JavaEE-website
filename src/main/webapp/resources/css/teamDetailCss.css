@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 2018-9-18, 16:34:19
+    Author     : Zhanzhan
+*/
+.box,
+.sample-layout > div {
+    background-color: #cce4f7;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 4px;
+}
+
+.box-stretched {
+    height: 100%;
+}
+
+.sample-layout {
+    margin: 0;
+}
+
+.sample-layout > div {
+    border: 1px solid #ffffff;
+}
+
+.vertical-container {
+    margin: 0;
+    height: 200px;
+    background: #efefef;
+    border-radius: 4px;
+}
+
+.nested-grid .p-col-4 {
+    padding-bottom: 1em;
+}
+
+
+.p-justify-stretch {
+
+}

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="template.css"/>
+        <title>Bonanza - #{userController.selected.userName}</title>
+    </h:head>
+    <h:body>
+        <div id="template-sidebar">
+            <ui:insert name="left" />
+            <h:form>
+                <h:commandLink id="iconButton" action="user_info"
+                               styleClass="template-cmd-link">
+                    <h:graphicImage value="../resources/ex_user.png"
+                                    class="template-pseudo-header"/>
+                </h:commandLink>
+                <br/>
+                <h:commandLink id="personal-link-id" action="admin"
+                               styleClass="template-cmd-link admin-nav-btn">
+                    <h:graphicImage value="/resources/adminIcon.svg"/>
+                </h:commandLink>
+                <h:commandLink id="team-link-id" action="team"
+                               styleClass="template-cmd-link team-nav-btn">
+                    <h:graphicImage value="/resources/teamIcon.svg" />
+                </h:commandLink>
+                <h:commandLink id="project-link-id" action="project"
+                               styleClass="template-cmd-link project-nav-btn">
+                    <h:graphicImage value="/resources/project-on-admin.svg" />
+                </h:commandLink>
+                <div class="template-sidebar-bottom">
+                    <a href="#" class="template-cmd-link disabled">
+                        <h:graphicImage value="/resources/apprise.png"
+                                        styleClass="template-todo-link" />
+                    </a>
+                    <a href="#" class="template-cmd-link disabled">
+                        <h:graphicImage value="/resources/set.png"
+                                        styleClass="template-todo-link" />
+                    </a>
+                </div>
+            </h:form>
+        </div>
+        <div id="template-content">
+            <div id="template-header">
+                <h:graphicImage value="/resources/bonanza-clientarea.png" />
+            </div>
+            <div id="template-body">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+    </h:body>
+</html>

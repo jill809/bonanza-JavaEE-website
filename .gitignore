@@ -1,0 +1,57 @@
+# Maven
+.mvn/
+
+# Compiled files
+/target/
+/build/
+/dist/
+/out/
+/nbbuild/
+/nbdist/
+/nbproject/private/
+
+# IntelliJ files and folders
+*.iml
+*.iws
+*.ipr
+.idea/
+.idea_modules/
+
+# Large binaries
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.war
+*.nar
+*.ear
+*.sar
+*.class
+
+# Large text files
+*.log
+
+# OS
+.DS_Store
+
+# Misc
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Potential bug creator
+lock
+
+# File that contains password
+glassfish-resources.xml

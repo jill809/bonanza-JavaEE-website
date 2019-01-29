@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="index.css"/>
+    </h:head>
+    <h:body>
+        <div>
+            <div>
+                <div class = "logo">
+                    <img src="resources/logo.png" style="width:80px; height: 35px"/>
+                </div>
+                <h:form>
+                    <h:commandLink action="login" style=" position:absolute;top:15px; right:330px" >
+                        <h:graphicImage value="resources/jiaocheng.png" style="  height: 15px"></h:graphicImage>
+                    </h:commandLink>
+                    <h:commandLink action="login" style=" position:absolute;top:15px; right:230px" >
+                        <h:graphicImage value="resources/login.png" style="  height: 15px"></h:graphicImage>
+                    </h:commandLink>
+                    <h:commandLink action="register.xhtml" style=" position:absolute;top:11px; right:125px" >
+                        <h:graphicImage value="resources/register.png" style="  height: 28px"></h:graphicImage>
+                    </h:commandLink>
+                </h:form>
+            </div>
+            <br/>
+            <br/>
+            <div style="background: url(resources/regist_bg.jpg);height: 500px;">
+                <div style="position:absolute;top:200px;left:300px;border: 5px solid darkgray;width: 60%;height: 30%;background-color: white;">
+                    <table width="60%" align="center">
+                        <tr>
+                            <br/>
+                            <div style="text-align: center"><font size="4">登录失败！</font></div>
+                            <br/>
+                            <br/>
+                            <div style="text-align: center"><h:outputText  id="wrongPNB" value="该手机号不存在，请检查或注册新账号"
+                                                                           rendered="#{userController.wrongPNBText}"/></div>
+                            <br/>
+                            <div style="text-align: center"><h:outputText id="wrongPS" value="密码与输入手机号不匹配" rendered="#{userController.wrongPSWText}"/></div>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div style="text-align: center;">
+                <a href="#">关于我们</a>
+                <a href="#">联系我们</a>
+                <a href="#">首页</a>
+                <a href="#">法律声明</a>
+                <br/>
+            </div>
+        </div>
+    </h:body>
+</html>

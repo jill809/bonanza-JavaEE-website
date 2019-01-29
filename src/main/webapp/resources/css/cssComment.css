@@ -1,0 +1,54 @@
+.out {
+    background-color: #fcfeff;
+    position: relative;
+    margin:0px 20px 0px 20px;
+    padding:10px 0px 0px 0px;
+}
+
+.show{
+    border-radius: 10px;
+    display:inline-block;
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+    background-size:100%;
+    background-image:url(./../resources/memo2.png);
+    height: 300px;
+    width:300px;
+    justify-content: center;  /*水平居中*/
+    align-items: center;      /*垂直居中*/
+    margin:30px 50px 100px 50px;
+    padding:0px;
+}
+
+.memotext{
+    display:block;
+    position: relative;
+    padding: 80px 20px 20px 20px;
+    height: 200px;
+    text-decoration:underline;
+    text-align:left;
+    font-size:18px;
+    line-height: 40px;
+}
+
+.userImage{
+    position:absolute;
+    left:12px;
+    bottom:20px;
+}
+
+.userName{
+    position:absolute;
+    left:55px;
+    bottom:32px;
+    font-size:15px;
+}
+
+.time{
+    position:absolute;
+    right:18px;
+    bottom:32px;
+    font-size:12px;
+}
+

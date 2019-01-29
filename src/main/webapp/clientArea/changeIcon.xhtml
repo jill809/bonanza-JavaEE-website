@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+                <h:outputStylesheet library="css" name="index.css"/>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <div>
+                    <div style="position: absolute;top: 15px;left:150px;width: 60px;height: 60px;">
+                        <h:graphicImage value="../resources/logo.png" style=" width:80px; height: 35px"></h:graphicImage>
+                    </div>
+                    <a href="index" style=" position:absolute;top:15px; right:330px"
+                       ><img src="../resources/jiaocheng.png" style="  height: 15px"/></a>
+                    <a href="admin.xhtml" style=" position:absolute;top:14px; right:230px" ><img src="../resources/zhuye.png" style="  height: 16px"/></a>
+                    <a href="../index.xhtml" style=" position:absolute;top:11px; right:125px" ><img src="../resources/zhuxiao.png" style="  height: 24px"/></a>
+                </div>
+                <br/>
+                <br/>
+                <div style="background: url(../resources/regist_bg.jpg);height: 500px;">
+                    <div style="position:absolute;top:180px;left:280px;border: 5px solid darkgray;width: 60%;height: 35%;background-color: white;">
+                        <table  width="20%"  style="float:left">
+                            <p:graphicImage style="margin: 30px; height:80px;" rendered="#{userController.selected.userPic != null}" value="#{userController.getPic}"></p:graphicImage>
+                            <p:graphicImage style="margin: 30px; height:80px;" rendered="#{userController.selected.userPic == null}" value="../resources/ex_user.png"></p:graphicImage>
+                        </table>
+                        <table width="80%" align="left" style="width: 100px;float:right">
+                            <h:form>
+                                <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                                              multiple="true" update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+                                <p:growl id="messages" showDetail="true" />
+                            </h:form>
+                        </table>
+                    </div>
+
+                </div>
+                <div style="text-align: center;">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系我们</a>
+                    <a href="#">首页</a>
+                    <a href="#">法律声明</a>
+                    <br/>
+                </div>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

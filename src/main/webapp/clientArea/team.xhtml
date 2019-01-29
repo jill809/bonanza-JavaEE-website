@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8"/>
+
+        <title>Facelets Template Example</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="cssTeam.css"/>
+                <div class="teamName">
+                    <h2>我的团队</h2>
+                </div>
+                <!--新建团队对话框-->
+                <br></br>
+                <div class="newTeam">
+                    <h:form>
+                        <h:commandButton value="查找并加入团队" style="float:right;margin:10px; z-index:2;" action="joinTeam"/>
+                    </h:form>
+                    <h:form>
+                        <p:commandButton value="+add新团队" style="float:right;margin:10px; z-index:2;" type="button" onclick="PF('teamDlg').show()"/>
+                        <p:dialog header="新建团队" widgetVar="teamDlg" showEffect="fade" hideEffect="blind" position="center">
+                            <h:form id="newTeamForm">
+                                <p:outputLabel for="teamName" value="团队名称:" /><br/>
+                                <p:inputText id="teamName" value="#{teamController.prepareCreate().teamName}" required="true"/><br/>
+                                <p:outputLabel for="teamIntro" value="团队简介:" /><br/>
+                                <p:inputText id="teamIntro" value="#{teamController.prepareCreate().teamIntro}"></p:inputText><br/>
+                            </h:form>
+                            <h:commandButton value="确认" action="#{teamController.createTeam()}"  />
+                            <h:commandButton value="放弃" type="reset"/>
+                        </p:dialog>
+                    </h:form>
+
+
+                </div>
+
+
+
+                <div class="out">
+                    <br/>
+                    <br/>
+                    <ui:repeat value="#{teamController.teamList}" var="team" rendered="#{teamController.teamList ne null}">
+                        <div class="showTeam">
+                            <h:form>
+                                <h:commandButton styleClass="delete" style="height:15px;"  actionListener="#{teamController.delTeam(team)}" image="./../resources/delTeam.png"/>
+                                <h:commandButton styleClass="delete" style="height:15px;"  actionListener="#{teamController.findSelectedTeam(team)}" action ="editTeam.xhtml"  image="./../resources/edit.png"/>
+                            </h:form>
+                            <div class="image">
+                                <h:form>
+                                    <h:commandLink action="#{teamController.findSelectedTeam(team)}">
+                                        <h:graphicImage value="./../resources/showTeam1.png" rendered="#{team.teamId%7 eq 0}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam2.png" rendered="#{team.teamId%7 eq 1}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam3.png" rendered="#{team.teamId%7 eq 2}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam4.png" rendered="#{team.teamId%7 eq 3}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam5.png" rendered="#{team.teamId%7 eq 4}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam6.png" rendered="#{team.teamId%7 eq 5}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam7.png" rendered="#{team.teamId%7 eq 6}" style=" height: 120px"></h:graphicImage>
+                                    </h:commandLink>
+                                </h:form>
+                            </div>
+                            <div class="team">
+                                <h:form>
+                                    <h:commandLink  action="#{teamController.findSelectedTeam(team)}" value="#{team.teamName}" style="height:30px"/>
+                                </h:form>
+                            </div>
+
+                        </div>
+                    </ui:repeat>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

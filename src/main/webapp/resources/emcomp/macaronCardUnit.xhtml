@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <cc:interface>
+        <cc:attribute name="buttonAction"
+                      method-signature="java.lang.String actionMethod()"
+                      required="true"/>
+        <cc:attribute name="checkbox" type="java.lang.Boolean"
+                      default="#{false}"/>
+        <cc:attribute name="checkValue"/>
+        <cc:attribute name="buttonTarget"/>
+        <cc:attribute name="buttonValue"/>
+        <cc:attribute name="descHtml" type="java.lang.String"
+                      default="[null]"/>
+        <cc:attribute name="circleHtml" type="java.lang.String"
+                      default="1"/>
+        <cc:attribute name="color" type="java.lang.Integer"
+                      default="1"/>
+        <!-- large / small -->
+        <cc:attribute name="size" type="java.lang.String" default="large"/>
+    </cc:interface>
+    <cc:implementation>
+        <h:outputStylesheet library="css" name="macaronCardUnit.css"/>
+        <div class="macaron-recover-spacing macaron-box
+             macaron-box-#{cc.attrs.size} macaron-color-#{cc.attrs.color}">
+            <div class="macaron-circle">
+                <h:outputText value="#{cc.attrs.circleHtml}" escape="false"/>
+            </div>
+            <h:panelGroup styleClass="macaron-desc" id="macaron-desc-html" layout="block">
+                <h:panelGroup rendered="#{cc.attrs.checkbox}" layout="block">
+                    <c:choose>
+                        <c:when test="#{cc.attrs.checkValue}">
+                            <h:outputText styleClass="macaron-del"
+                                          value="#{cc.attrs.descHtml}" escape="false"/>
+                        </c:when>
+                        <c:otherwise>
+                            <h:outputText value="#{cc.attrs.descHtml}" escape="false"/>
+                        </c:otherwise>
+                    </c:choose>
+                </h:panelGroup>
+            </h:panelGroup>
+            <h:commandButton style="display: none" id="macaron-action-button"
+                             action="#{cc.attrs.buttonAction}">
+                <f:setPropertyActionListener value="#{cc.attrs.buttonValue}"
+                                             target="#{cc.attrs.buttonTarget}"/>
+            </h:commandButton>
+            <h:outputLabel id="macaron-checked" styleClass="macaron-task-checkbox"
+                           for="macaron-task-checkbox">
+                <span class="macaron-task-checkicon">
+                    <h:outputText rendered="#{cc.attrs.checkValue}"
+                                  value="√"/>
+                </span>
+            </h:outputLabel>
+            <c:if test="#{cc.attrs.checkbox}">
+                <h:selectBooleanCheckbox style="display: none" id="macaron-task-checkbox"
+                                         value="#{cc.attrs.checkValue}">
+                    <p:ajax update="macaron-checked macaron-desc-html"/>
+                </h:selectBooleanCheckbox>
+            </c:if>
+            <h:outputLabel styleClass="macaron-action-button" for="macaron-action-button"/>
+        </div>
+    </cc:implementation>
+</html>
+

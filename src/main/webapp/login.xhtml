@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="index.css"/>
+    </h:head>
+    <h:body>
+        <div class = "main">
+            <div>
+                <div class = "logo">
+                    <img src="resources/logo.png" style="width:80px; height: 35px"/>
+                </div>
+                <h:form>
+                    <h:commandLink action="login" style=" position:absolute;top:15px; right:230px" >
+                        <h:graphicImage value="resources/jiaocheng.png" style="  height: 15px"></h:graphicImage>
+                    </h:commandLink>
+                    <h:commandLink action="register.xhtml" style=" position:absolute;top:11px; right:125px" >
+                        <h:graphicImage value="resources/register.png" style="  height: 28px"></h:graphicImage>
+                    </h:commandLink>
+                </h:form>
+            </div>
+            <div style="width:300px; height:300px;position:absolute; left:40%; top:40%; margin-left: -100px; border: 1px solid darkgray;margin-top: -100px;background-color: white; opacity:0.8;">
+                <table align="center">
+                    <h:form id="loginForm">
+
+                        <p style="text-align: center">PhoneNumber:</p>
+                        <h:inputText id="phoneNum" value="#{userController.selected.userPhoneNum}"  required="true" style="margin-left:20px">
+                            <f:validator validatorId="jill.phoneValidater"/>
+                        </h:inputText>
+                        <br/>
+                        <p style="text-align: center">Password :</p>
+                        <h:inputSecret id="pass"  style="margin-left:20px"
+                                       value="#{userController.selected.userPassword}"/><br/>
+                        <h:message style="color: red; text-decoration: overline" for="phoneNum" id="errors1"/><br/>
+                        <h:commandButton id="registerButton"  style="margin-left:50px;" action="#{userController.login()}" value="登录"/>
+                        <h:message style="color: red; text-decoration: overline" for="registerButton"
+                                   id="errors_register"/>
+                    </h:form>
+                </table>
+            </div>
+
+            <td colspan="2">#{userController.logout()}</td>
+        </div>
+    </h:body>
+</html>

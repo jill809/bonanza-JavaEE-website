@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:em = "http://xmlns.jcp.org/jsf/composite/emcomp">
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8"/>
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <!--<h:outputStylesheet library="css" name="teamDetail.css"/>-->
+        <title>Facelets Template Example</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="teamDetail.css"/>
+                <h:outputStylesheet library="css" name="cssTeam.css"/>
+                <div id="head" style="margin:20px 20px 0px 50px ;">
+                    <h2 class="highlightName">#{teamDetailController.creator.userName.substring(0, 1)}</h2>
+                    <h1 class="teamHeader">#{teamController.selectedTeam.teamName}团队 - #{teamDetailController.creator.userName}</h1>
+                    <br/>
+                    <br/>
+                </div>
+                <div styleClass="center">
+                    <br/>
+                    <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+                    <br/>
+
+                    <div class="memberout">
+                        <h:form>
+                            <div class="memberheader">
+                                <div style="display: inline">
+                                    <h2>团队成员</h2>
+                                </div>
+                                <div class="addButton">
+                                    <h:commandButton image="../resources/memberIcon/add1.svg" action="findUser" style="height:40px"
+                                                     rendered="#{teamController.userRole eq 'Creator'||teamController.userRole eq 'Admin'}"></h:commandButton>
+                                </div>
+                                <!--添加成员-->
+                            </div>
+                            <div class="creator" title="创建者">
+                                <div class="creatoricon">
+                                    <h:graphicImage value="./../resources/memberIcon/creator.svg" height="40px"></h:graphicImage>
+                                </div>
+                                <div class="creatorname">
+                                    <h:outputText value="#{teamDetailController.creator.userName}"></h:outputText>
+                                </div>
+                            </div>
+
+                            <ui:repeat value="#{teamDetailController.adminList}" var="admin"
+                                       rendered="#{teamDetailController.adminList ne null}">
+                                <div class="admin">
+                                    <div title="管理员">
+                                        <div class="creatoricon">
+                                            <h:graphicImage value="./../resources/memberIcon/admin.svg" height="40px"></h:graphicImage>
+                                        </div>
+                                        <div class="creatorname">
+                                            <h:outputText value="#{admin.userName}"></h:outputText>
+                                        </div>
+                                    </div>
+                                    <div class="setadmin" title="撤销管理员">
+                                        <h:commandButton image="./../resources/memberIcon/unsetAdmin.svg"
+                                                         style="height:25px"
+                                                         rendered="#{teamController.userRole eq 'Creator'}"
+                                                         actionListener="#{teamDetailController.unSetAdmin(admin)}"></h:commandButton>
+                                    </div>
+                                    <div class="del" title="移除成员">
+                                        <h:commandButton image="../resources/memberIcon/delete.png"
+                                                         style="height:25px"
+                                                         rendered="#{teamController.userRole eq 'Creator' }"
+                                                         actionListener="#{teamDetailController.removeUserFromTeam(admin)}"></h:commandButton>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+
+                            <ui:repeat value="#{teamDetailController.memberList}" var="member"
+                                       rendered="#{teamDetailController.memberList ne null}">
+                                <div class="member">
+                                    <div title="普通成员">
+                                        <div class="creatoricon">
+                                            <h:graphicImage value="./../resources/memberIcon/member.png" height="40px"></h:graphicImage>
+                                        </div>
+                                        <div class="creatorname">
+                                            <h:outputText value="#{member.userName}"></h:outputText>
+                                        </div>
+                                    </div>
+                                    <div class="setadmin" title="设为管理员">
+                                        <h:commandButton image="./../resources/memberIcon/setAdmin.svg"
+                                                         style="height:25px"
+                                                         rendered="#{teamController.userRole eq 'Creator'}"
+                                                         actionListener="#{teamDetailController.setAdmin(member)}"></h:commandButton>
+                                    </div>
+                                    <div class="del" title="移除成员">
+                                        <h:commandButton image="./../resources/memberIcon/delete.png"
+                                                         style="height:25px"
+                                                         rendered="#{teamController.userRole eq 'Creator'||teamController.userRole eq 'Admin'}"
+                                                         actionListener="#{teamDetailController.removeUserFromTeam(member)}"></h:commandButton>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </h:form>
+                    </div>
+                    <div id="projectOfTeam" class="project-div">
+                        <div>
+                            <h:form>
+                                <p:commandButton title="新建项目" style="margin:10px 0px 10px 60px ;float: right;margin-right: 50px;"   rendered="#{teamController.userRole eq 'Creator'||teamController.userRole eq 'Admin'}" value=" + Add新项目" styleClass="right" type="button" onclick="PF('projectDlg').show()"/>
+                                <p:dialog header="新建项目" widgetVar="projectDlg" showEffect="explode" width="400px" hideEffect="fade" position="center">
+                                    <h4 >现在就来创建你的新项目吧</h4>
+                                    <h:form id="newTeamForm" styleClass="center_content">
+                                        <p:outputLabel value="项目名称" /><br/>
+                                        <h:inputText id="projectName" value="#{teamDetailController.prepareProject().projectName}" required="true"/>
+                                        <br/><br/>
+                                        <p:outputLabel value="项目开始日期：" /><br/>
+                                        <p:calendar id="projectStart" value="#{teamDetailController.prepareProject().projectStartTime}" showOn="button" />
+                                        <br/><br/>
+                                        <p:outputLabel value="项目截止日期：" /><br/>
+                                        <p:calendar id="projectFinish" value="#{teamDetailController.prepareProject().projectFinishTime}" showOn="button" />
+                                        <br/><br/>
+                                    </h:form>
+
+                                    <!--icon="ui-icon-disk"/>-->
+                                    <h:commandButton value="确认" action="#{teamDetailController.createProject()}" type="submit" style="left:300px" />
+                                    <h:commandButton value="放弃" type="reset" style="left:100px"/>
+
+                                    <!--icon="ui-icon-arrowrefresh-1-w"/>-->
+                                </p:dialog>
+                            </h:form>
+                        </div>
+                        <div>
+                            <h2 style="margin:20px 20px 0px 60px">团队项目:</h2>
+                            <div class="out">
+                                <ui:repeat value="#{teamDetailController.projectList}" var="project"
+                                           rendered="#{teamDetailController.projectList ne null}">
+                                    <div class="showTeam">
+                                        <h:form>
+                                            <h:commandButton styleClass="delete" style="height:15px;"  actionListener="#{teamDetailController.delPro(project)}" image="./../resources/delTeam.png"/>
+                                            <h:commandButton styleClass="delete" style="height:15px;" action="editProject.xhtml"  onclick="#{projectController.setProject(project)}"  image="./../resources/edit.png"/>
+                                        </h:form>
+                                        <div class="image">
+                                            <h:form>
+                                                <h:commandLink action="#{projectController.findSelectedProject(project)}">
+                                                    <h:graphicImage value="./../resources/showTeam1.png" rendered="#{projectController.project.projectId%7 eq 0}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam2.png" rendered="#{projectController.project.projectId%7 eq  1}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam3.png" rendered="#{projectController.project.projectId%7 eq  2}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam4.png" rendered="#{projectController.project.projectId%7 eq  3}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam5.png" rendered="#{projectController.project.projectId%7 eq  4}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam6.png" rendered="#{projectController.project.projectId%7 eq  5}" style=" height: 80px"></h:graphicImage>
+                                                    <h:graphicImage value="./../resources/showTeam7.png" rendered="#{projectController.project.projectId%7 eq  6}" style=" height: 80px"></h:graphicImage>
+                                                </h:commandLink>
+                                            </h:form>
+                                        </div>
+                                        <div class="team">
+                                            <h:form>
+                                                <h:commandLink  action="#{projectController.findSelectedProject(project)}" value="  #{project.projectName}" style="font-size:15px;height:30px"/>
+                                            </h:form>
+                                        </div>
+                                        <div class="team" style="font-size: 12px;">
+                                            <h:outputText value="计划完成："/>
+                                            <em:timeOutput time="#{project.projectFinishTime}"/>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                            <h:form>
+                                <h:dataTable >
+                                    <h:column>
+                                        <h:outputText value="#{project.projectName}"></h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{project.projectState}"></h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <em:timeOutput time="#{project.projectStartTime}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton value="···" styleClass="border:none" action="projectDetail"
+                                                         actionListener="#{projectController.findSelectedProject(project)}"></h:commandButton>
+                                    </h:column>
+                                    <h:column>
+                                        <h:form>
+                                            <h:commandButton style="height:15px;"  actionListener="#{teamDetailController.delPro(project)}" image="./../resources/delTeam.png"/>
+                                            <h:commandButton id= "change" style="height:15px;"  action="editProject.xhtml"  onclick="#{projectController.setProject(project)}"
+                                                             image="./../resources/edit.png"/>
+                                        </h:form>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                            <h:outputText style="margin:60px" value="团队还未创建项目,快来创建一个项目吧"
+                                          rendered="#{teamDetailController.projectList eq null}"></h:outputText><br/>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

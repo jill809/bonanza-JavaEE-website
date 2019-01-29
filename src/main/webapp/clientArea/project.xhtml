@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:em = "http://xmlns.jcp.org/jsf/composite/emcomp">
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=UTF-8"/>
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Facelets Template Example</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="cssTeam.css"/>
+                <h3 style="margin:50px 20px 0px 100px; font-size: 25px">我管理的项目：</h3>
+                <div class="out">
+                    <br/>
+                    <br/>
+                    <ui:repeat value="#{projectController.managedProject}" var="project"
+                               rendered="#{projectController.managedProject ne null}">
+                        <div class="showTeam">
+                            <div class="image">
+                                <h:form>
+                                    <h:commandLink action="#{projectController.findSelectedProject(project)}">
+                                        <h:graphicImage value="./../resources/showTeam1.png" rendered="#{projectController.project.projectId%7 eq 0}" style=" height: 80px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam2.png" rendered="#{projectController.project.projectId%7 eq  1}" style=" height: 80px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam3.png" rendered="#{projectController.project.projectId%7 eq  2}" style=" height: 80px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam4.png" rendered="#{projectController.project.projectId%7 eq  3}" style=" height: 80px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam5.png" rendered="#{projectController.project.projectId%7 eq  4}" style=" height: 80px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam6.png" rendered="#{projectController.project.projectId%7 eq  5}" style=" height: 80px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam7.png" rendered="#{projectController.project.projectId%7 eq  6}" style=" height: 80px"></h:graphicImage>
+                                    </h:commandLink>
+                                </h:form>
+                            </div>
+                            <div class="team">
+                                <h:form>
+                                    <h:commandLink  action="#{projectController.findSelectedProject(project)}" value="  #{project.projectName}" style="font-size:15px;height:30px"/>
+                                </h:form>
+                            </div>
+                            <div class="team" style="font-size: 12px;">
+                                <h:outputText value="计划完成："/>
+                                <em:timeOutput time="#{project.projectFinishTime}"/>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+                <h:outputText value="没有管理的项目"
+                              rendered="#{projectController.managedProject eq null}"></h:outputText>
+                <h3 style="margin:50px 20px 0px 100px; font-size: 25px">我参与的项目：</h3>
+                <div class="out">
+                    <br/>
+                    <br/>
+                    <ui:repeat value="#{projectController.memberedProject}" var="project"
+                               rendered="#{projectController.memberedProject ne null}">
+                        <div class="showTeam">
+                            <div class="image">
+                                <h:form>
+                                    <h:commandLink action="#{projectController.findSelectedProject(project)}">
+                                        <h:graphicImage value="./../resources/showTeam1.png" rendered="#{projectController.project.projectId%7 eq 0}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam2.png" rendered="#{projectController.project.projectId%7 eq  1}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam3.png" rendered="#{projectController.project.projectId%7 eq  2}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam4.png" rendered="#{projectController.project.projectId%7 eq  3}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam5.png" rendered="#{projectController.project.projectId%7 eq  4}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam6.png" rendered="#{projectController.project.projectId%7 eq  5}" style=" height: 120px"></h:graphicImage>
+                                        <h:graphicImage value="./../resources/showTeam7.png" rendered="#{projectController.project.projectId%7 eq  6}" style=" height: 120px"></h:graphicImage>
+                                    </h:commandLink>
+                                </h:form>
+                            </div>
+                            <div class="team">
+                                <h:form>
+                                    <h:commandLink  action="#{projectController.findSelectedProject(project)}" value="  #{project.projectName}" style="height:30px"/>
+                                </h:form>
+                            </div>
+                            <div class="team" style="margin:5px;font-size: 12px;">
+                                <h:outputText value="计划完成时间："/>
+                                <em:timeOutput time="#{project.projectFinishTime}"/>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+
+            </ui:define>
+            <h:outputText value="没有加入的项目"
+                          rendered="#{projectController.memberedProject eq null}"></h:outputText>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Find User Successfully</title>
+        <style type="text/css">
+            .ui-widget{
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <!--用于让用户输入手机号-->
+        <h:form id="searchUser">
+            <p class="ui-widget">该用户已被成功找到，是否要将其加入团队</p>
+            <h5>现在就来添加你的新成员吧</h5>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="请输入你要查找的用户手机号" for="pNum"/>
+                <h:inputText id="pNum" value="#{teamDetailController.userPNBfind}" required="true">
+                    <f:validator validatorId="jill.phoneValidater"/>
+                </h:inputText>
+                <p:commandButton id="okay" value="确认加入" actionListener="#{addUserController.submitPNum}">
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

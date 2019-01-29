@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:em="http://xmlns.jcp.org/jsf/composite/emcomp">
+    <h:head></h:head>
+    <h:body styleClass="macaron-spacing">
+        <h:outputStylesheet library="css" name="macaronCards.css" />
+        <h:form>
+            <c:forEach var="i" begin="1" end="7">
+                <em:macaronCardUnit buttonAction="#{userController.logout}"
+                                    descHtml="学习微信小程序开发，顺便学点什么别的什么鬼东西吧"
+                                    color="#{i}" circleHtml="#{i}"
+                                    checkbox="#{true}" checkValue="#{macaronTestBean.x}"/>
+            </c:forEach>
+        </h:form>
+    </h:body>
+</html>

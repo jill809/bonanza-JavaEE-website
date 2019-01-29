@@ -1,0 +1,165 @@
+.macaron-box * {
+    font-family: 'Microsoft YaHei UI', 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+    transition: .3s all;
+    user-select: none;
+}
+
+.macaron-recover-spacing {
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.macaron-box {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+.macaron-box-large {
+    width: 200px;
+    height: 190px;
+}
+
+.macaron-color-1 {
+    background: #f4e9f7;
+    color: #e8ccf0;
+}
+
+.macaron-color-1 > .macaron-desc {
+    color: #9560a3;
+}
+
+.macaron-color-2 {
+    background: #deefff;
+    color: #ccdef0;
+}
+
+.macaron-color-2 > .macaron-desc {
+    color: #6083a3;
+}
+
+.macaron-color-3 {
+    background: #e9f7f7;
+    color: #c5e9e9;
+}
+
+.macaron-color-3 > .macaron-desc {
+    color: #60a3a3;
+}
+
+.macaron-color-4 {
+    background: #f7eee9;
+    color: #f5ded1;
+}
+
+.macaron-color-4 > .macaron-desc {
+    color: #a37860;
+}
+
+.macaron-color-5 {
+    background: #f7f5e9;
+    color: #e7e1c1;
+}
+
+.macaron-color-5 > .macaron-desc {
+    color: #a39960;
+}
+
+.macaron-color-6 {
+    background: #e9ebf7;
+    color: #ccd1f0;
+}
+
+.macaron-color-6 > .macaron-desc {
+    color: #606aa3;
+}
+
+.macaron-color-7 {
+    background: #ebf7e8;
+    color: #caedc1;
+}
+
+.macaron-color-7 > .macaron-desc {
+    color: #88a360;
+}
+
+.macaron-circle {
+    border-radius: 38px;
+    background: white;
+    width: 74px;
+    height: 74px;
+    line-height: 74px;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-60%);
+    margin: 0 auto;
+    font-size: 36px;
+}
+
+.macaron-desc {
+    position: absolute;
+    bottom: 25px;
+    text-align: center;
+    width: 85%;
+    margin: 0;
+    font-weight: lighter;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.macaron-box > .macaron-action-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .2s background-color;
+    opacity: 0.3;
+}
+
+.macaron-box > .macaron-action-button:hover {
+    background: white;
+}
+
+.macaron-box > .macaron-action-button:active {
+    background: #eee;
+}
+
+.macaron-task-checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58px;
+    height: 52px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.macaron-task-checkicon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    position:absolute;
+    top: 12px;
+    left:15px;
+    background: white;
+    font-weight: bolder;
+    line-height: 20px;
+    text-align: center;
+}
+
+.macaron-del {
+    text-decoration: line-through;
+}

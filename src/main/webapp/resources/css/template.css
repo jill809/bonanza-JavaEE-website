@@ -1,0 +1,103 @@
+body {
+    background: #fcfeff;
+    margin: 0;
+}
+
+.template-vertical-middle {
+    vertical-align: middle;
+}
+
+#template-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    box-sizing: border-box;
+    border-right: 2px solid #f4f9fb;
+    background: white;
+    line-height: 80px;
+    text-align: center;
+}
+
+#template-sidebar > form {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.template-cmd-link {
+    display: block;
+}
+
+.template-cmd-link:hover {
+    background: #eaf5ff;
+}
+
+.template-cmd-link:active {
+    background: #e0edf9;
+}
+
+.template-cmd-link.disabled,
+.template-cmd-link.disabled:hover,
+.template-cmd-link.disabled:active {
+    cursor: default;
+    background: transparent;
+}
+
+.template-cmd-link > img {
+    vertical-align: middle;
+    height: 25px;
+}
+
+#template-content {
+    margin-left: 80px;
+}
+
+#template-header {
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    box-sizing: border-box;
+    background: white;
+    border-bottom: 2px solid #f4f9fb;
+}
+
+#template-header > img {
+    vertical-align: middle;
+}
+
+#template-sidebar .template-pseudo-header {
+    width: 45px;
+    height: 45px;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 120px;
+    width: 60px;
+    height: 60px;
+}
+
+.template-sidebar-bottom {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.item_left {
+    height: 25px;
+    padding: 2px 10px 10px 10px;
+    color: black;
+    margin: 2px 2px 4px 2px;
+}
+
+.item_left:focus {
+    background: #fcfeff;
+    z-index: 2;
+}
+
+#template-body {
+    padding: 50px 100px;
+}

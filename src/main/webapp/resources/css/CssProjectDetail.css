@@ -1,0 +1,204 @@
+.planListInnerBox {
+    position: relative;
+    padding: 30px 20px 20px 20px;
+    margin-bottom:40px;
+}
+
+.planItem {
+    position: relative;
+    overflow:auto;
+    width: 400px;
+    height: 800px;
+    padding:20px;
+    line-height: 36px;
+    margin-right: 10px;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    background-color: #add;
+    /*    border-top-left-radius: 10px;
+        border-top-right-radius: 10px;*/
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.planItem .planHeader {
+    width: 340px;
+    height: 150px;
+    /*    background-color: #9099a2;*/
+    color: white;
+    padding-top: 10px;
+    padding-right: 15px;
+    text-indent: 20px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.unfinishplanName{
+    float: top;
+    font-weight: 500;
+    display: inline;
+    font-size: 20px;
+    margin-bottom: 10px;
+    width: 220px;
+    color: white;
+    font-weight: 600;
+}
+
+.planName{
+    float: top;
+    font-weight: 500;
+    display: inline;
+    font-size: 20px;
+    margin-bottom: 10px;
+    width: 220px;
+    color: white;
+}
+
+.addtask{
+    float:left;
+    height:30px;
+    margin-left: 5px;
+    display: inline;
+}
+.addtask :hover {
+    float:left;
+    height:30px;
+    margin-right: 0px;
+    display: inline;
+}
+
+.delPlan{
+    float: right;
+    height:15px;
+    width: 15px;
+    display: inline;
+    margin-left: 0px;
+    margin-right: 50px;
+}
+
+.deltask{
+    float: right;
+    height:15px;
+    width: 15px;
+    display: inline;
+    margin-left: 0px;
+    margin-right: 7px;
+}
+
+.planTime{
+    float: left;
+    display: inline;
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: 220px;
+    color: white;
+}
+
+.taskItem {
+    position: relative;
+    width: 280px;
+    height: 450px;
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.untaskName{
+    float: left;
+    margin-right: 10px;
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight:800;
+}
+
+.taskName{
+    float: left;
+    margin-right: 20px;
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight:800;
+    text-decoration:line-through;
+}
+
+.set{
+    float: left;
+    height:25px;
+    width: 25px;
+    display: inline;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.taskInfo{
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 16px;
+    font-size: 22px;
+    color: grey;
+    text-decoration: underline;
+    line-height: 25px;
+}
+
+
+
+
+.executor{
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+    width: 250px;
+    height: 150px;
+    border:none;
+    border-top:1px dashed grey;
+    float: bottom;
+    font-weight:550px;
+    font-size: 18px;
+    color: grey;
+}
+
+
+.executorOut{
+    float:left;
+    position: relative;
+    display: block;
+}
+
+.executorItem{
+    position: relative;
+    float:left;
+    display: block;
+    height: 25px;
+}
+
+.creatoricon{
+    display:inline;
+    float: left;
+    width:25px;
+    height: 25px;
+}
+
+.creatorname{
+    width: 200px;
+    float: left;
+    font-size: 16px;
+    display:inline;
+}
+
+.time{
+    position:absolute;
+    right:18px;
+    bottom:32px;
+    font-size:12px;
+
+}
+.edit_icon{
+    float: left;
+    height:15px;
+    width: 15px;
+    display: inline;
+    margin-left: 0px;
+    margin-right: 7px;
+}

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head></h:head>
+    <h:body>
+        <ui:composition template="newTemplate.xhtml">
+            <ui:define name="content">
+                <h:outputStylesheet library="css" name="admin.css"/>
+                <div id="mytaskleft" class="quarter-div">
+                    <h3 style="margin-top:0">待我处理的任务</h3>
+                    <p:scrollPanel style="width:500px;height:200px">
+                        <h:form>
+                            <h:dataTable value="#{taskController.unfinishTaskList}" var="unfinishTask"
+                                         rendered="#{taskController.unfinishTaskList ne null}">
+                                <h:column>
+                                    #{unfinishTask.taskName}
+                                </h:column>
+                                <h:column>
+                                    #{unfinishTask.taskState}
+                                </h:column>
+                                <h:column>
+                                    #{unfinishTask.taskIntro}
+                                </h:column>
+                                <h:column>
+                                    <h:commandButton id="toMakeFinish" value="置为完成"
+                                                     action="#{taskController.ChangeToFinish(unfinishTask)}">
+                                    </h:commandButton>
+                                </h:column>
+                            </h:dataTable>
+                            <h:outputText value="没有待我处理的任务"
+                                          rendered="#{taskController.unfinishTaskList eq null}"></h:outputText>
+                        </h:form>
+                    </p:scrollPanel>
+                </div>
+                <div id="mytaskleft" class="quarter-div">
+                    <h3>已经完成的任务</h3>
+
+                    <p:scrollPanel mode="native" style="width:500px;height:200px">
+                        <h:form>
+                            <h:dataTable value="#{taskController.finishAndOvertimeTaskList}"
+                                         rendered="#{taskController.finishAndOvertimeTaskList ne null}"
+                                         var="finishTask">
+                                <h:column>
+                                    #{finishTask.taskName}
+                                </h:column>
+                                <h:column>
+                                    #{finishTask.taskState}
+                                </h:column>
+                                <h:column>
+                                    #{finishTask.taskIntro}
+                                </h:column>
+                                <h:column>
+                                    <h:commandButton id="toMakeUnfinish" value="置为未完成"
+                                                     rendered="#{finishTask.taskState eq 'Finish'}"
+                                                     action="#{taskController.ChangeToUnfinish(finishTask)}">
+                                    </h:commandButton>
+                                </h:column>
+                            </h:dataTable>
+                            <h:outputText value="没有已完成任务"
+                                          rendered="#{taskController.finishAndOvertimeTaskList eq null}"></h:outputText>
+                        </h:form>
+                    </p:scrollPanel>
+                </div>
+                <div id="myteamtopright" class="quarter-div">
+                    <h3 style="margin-top:0">我的团队</h3>
+                    <p:scrollPanel style="width:300px;height:200px">
+                        <h:form>
+                            <h:dataTable value="#{teamController.teamList}" var="team"
+                                         rendered="#{teamController.teamList ne null}">
+                                <h:column>
+                                    #{team.teamId}
+                                </h:column>
+                                <h:column>
+                                    #{userController.date2String(team.teamDate)}
+                                </h:column>
+                                <h:column>
+                                    #{team.teamName}
+                                </h:column>
+                                <h:column>
+                                    #{team.teamIntro}
+                                </h:column>
+                                <h:column>
+                                    <h:commandButton value="Submit"
+                                                     action="#{teamController.findSelectedTeam(team)}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:outputText value="没有加入的团队" rendered="#{teamController.teamList eq null}"></h:outputText>
+                        </h:form>
+                    </p:scrollPanel>
+                </div>
+                <div id="myprojectbottomright" class="quarter-div">
+                    <h3>我的项目</h3>
+                    <p:scrollPanel style="width:300px;height:200px">
+                        <h:form>
+                            <h3>我管理的项目</h3>
+                            <h:dataTable value="#{projectController.managedProject}" var="project"
+                                         rendered="#{projectController.managedProject ne null}">
+                                <h:column>
+                                    #{project.projectName}
+                                </h:column>
+                                <h:column>
+                                    #{userController.date2Date(project.projectStartTime)}
+                                </h:column>
+                                <h:column>
+                                    #{project.projectState}
+                                </h:column>
+                                <h:column>
+                                    <h:commandButton value="Submit"
+                                                     action="#{projectController.findSelectedProject(project)}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:outputText value="没有管理的项目"
+                                          rendered="#{projectController.managedProject eq null}"></h:outputText>
+                            <h3>我加入的项目</h3>
+                            <h:dataTable value="#{projectController.memberedProject}" var="project"
+                                         rendered="#{projectController.memberedProject ne null}">
+                                <h:column>
+                                    #{project.projectName}
+                                </h:column>
+                                <h:column>
+                                    #{userController.date2Date(project.projectStartTime)}
+                                </h:column>
+                                <h:column>
+                                    #{project.projectState}
+                                </h:column>
+                                <h:column>
+                                    <h:commandButton id="submitButton" value="Submit"
+                                                     action="#{projectController.findSelectedProject(project)}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:outputText value="没有加入的项目"
+                                          rendered="#{projectController.memberedProject eq null}"></h:outputText>
+                        </h:form>
+                    </p:scrollPanel>
+                </div>
+                <h:form enctype="multipart/form-data">
+                    <p:fileUpload value="#{fileUploadController.file}" mode="simple" required="true"/>
+                    <p:commandButton value="Submit" ajax="false"
+                                     actionListener="#{fileUploadController.handleFileUpload}"/>
+                    <h:messages/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
